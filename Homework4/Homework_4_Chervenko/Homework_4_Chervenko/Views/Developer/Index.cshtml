@@ -1,0 +1,14 @@
+﻿@model Developer
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form asp-action="AddDeveloper" method="post">
+        <label>Ім’я:</label>
+        <input asp-for="Name" />
+        <br />
+        <label>Email:</label>
+        <input asp-for="Email" type="email" />
+        <br />
+        <button type="submit">Стати розробником</button>
+    </form>
+</div>
