@@ -1,0 +1,25 @@
+﻿@model Homework_7_Chervenko.Models.Expense
+@{
+    ViewData["Title"] = "Деталі витрати";
+}
+
+<h2>Детальна інформація про витрату</h2>
+
+<div class="card p-3" style="max-width:400px">
+    <dl class="row">
+        <dt class="col-sm-5">Категорія</dt>
+        <dd class="col-sm-7">@Model.Category?.Name</dd>
+
+        <dt class="col-sm-5">Сума</dt>
+        <dd class="col-sm-7">@Model.Price.ToString("C")</dd>
+
+        <dt class="col-sm-5">Коментар</dt>
+        <dd class="col-sm-7">@Model.Comment</dd>
+
+        <dt class="col-sm-5">Дата</dt>
+        <dd class="col-sm-7">@Model.Date.ToShortDateString()</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Редагувати</a>
+    <a asp-action="Index" class="btn btn-secondary btn-sm">Назад до списку</a>
+</div>

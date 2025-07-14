@@ -1,0 +1,78 @@
+﻿@model Homework_7_Chervenko.Models.Expense
+
+@{
+    ViewData["Title"] = "Створення витрати";
+}
+
+<h1>Створення витрати</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <style>
+            * {
+                pointer-events: auto !important;
+            }
+
+            form {
+                position: relative;
+                z-index: 1000;
+            }
+
+            .form-group {
+                position: relative;
+                z-index: 1;
+                margin-bottom: 1rem;
+            }
+
+            select.form-control {
+                appearance: auto !important;
+                -webkit-appearance: auto !important;
+                -moz-appearance: auto !important;
+                position: relative;
+                z-index: 10;
+                background-color: white !important;
+                color: black;
+                height: auto;
+                min-height: 40px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .col-md-6 {
+                overflow: visible !important;
+            }
+        </style>
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Категорія</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Сума (грн)</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label">Коментар (необов'язково)</label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Додати" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2">Назад до списку</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Homework_7_Chervenko.Models.Expense>
+@{
+    ViewData["Title"] = "Витрати";
+    int? selectedMonth = ViewBag.Month as int?;
+    string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+}
+
+<h2>Витрати</h2>
+
+<div class="mb-3">
+    <a asp-controller="Expense" asp-action="Create" class="btn btn-success">Додати витрату</a>
+    <a asp-controller="Category" asp-action="Index" class="btn btn-outline-secondary">Категорії</a>
+</div>
+
+<form asp-action="Index" method="get" class="form-inline mb-3">
+    <label class="mr-2">Фільтр за місяцем:</label>
+    <select name="month" class="form-control mr-2">
+        <option value="">-- Усі --</option>
+        @for (int i = 1; i <= 12; i++)
+        {
+            <option value="@i" selected="@(selectedMonth == i ? "selected" : null)">
+                @monthNames[i - 1]
+            </option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Фільтрувати</button>
+    <a asp-action="Index" class="btn btn-secondary ml-2">Скинути</a>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Сума</th>
+            <th>Коментар</th>
+            <th>Дата</th>
+            <th>Категорія</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Price грн</td>
+                <td>@item.Comment</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>@item.Category?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
